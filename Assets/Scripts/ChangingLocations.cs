@@ -23,13 +23,12 @@ public class ChangingLocations : MonoBehaviour
     
     [SerializeField]
     InputFromPlayer inputFromPlayer;
-    void Start()
+    void Awake()
     {
         portal = FindObjectOfType<Portals>();
         playerScript = FindObjectOfType<Player>();
         basketball = FindObjectOfType<Basketball>();
         inputFromPlayer = FindObjectOfType<InputFromPlayer>();
-        portal.PortalEnum = Portals.Portal.PortalTwo;
     }
 
     private void OnTriggerEnter(Collider other)

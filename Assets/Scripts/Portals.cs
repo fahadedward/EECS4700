@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class Portals : MonoBehaviour
 {
     public enum Portal
@@ -25,6 +23,7 @@ public class Portals : MonoBehaviour
         get { return portal; }
         set { portal = value; }
     }
+
     void Start()
     {
         portal = Portal.PortalOne;
@@ -36,7 +35,10 @@ public class Portals : MonoBehaviour
         {
             case Portal.PortalOne:
                 portals[0].SetActive(true);
-                break;
+                portals[1].SetActive(false);
+                portals[2].SetActive(false);
+                portals[3].SetActive(false);
+                break; 
             case Portal.PortalTwo:
                 portals[0].SetActive(false);
                 portals[1].SetActive(true);
