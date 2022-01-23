@@ -12,6 +12,7 @@ TagManager:
   - Portal3
   - Basketball
   - Toy
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
