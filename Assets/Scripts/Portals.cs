@@ -29,7 +29,7 @@ public class Portals : MonoBehaviour
         portal = Portal.PortalOne;
     }
 
-    void changePortals()
+    void ChangePortals()
     {
         switch (portal)
         {
@@ -67,6 +67,6 @@ public class Portals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        changePortals();
+        ChangePortals();
     }
 }
