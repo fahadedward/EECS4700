@@ -1,27 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using TMPro;
+
 
 public class DoorSystem : MonoBehaviour
 {
-    private static DoorSystem _instance;
-    // Start is called before the first frame update
-    void Awake()
+    [SerializeField] private Key.KeyType keyType;
+
+    [SerializeField]
+    Animation openDoor;
+
+    [SerializeField]
+    private DoorType doorType;
+
+    [SerializeField]
+    Sounds openDoorSound;
+    private void Awake()
     {
-        _instance = this;
+        
+    }
+    public enum DoorType
+    {
+        Sidedoor,
+        Frontdoor
+    }
+    public Key.KeyType GetKeyType()
+    {
+        return keyType;
     }
 
-    public static DoorSystem m_instance
+    private void Update()
     {
-        get { return _instance; }
-    }
-    public event Action<int> doorOpenTriggerAction;  
-    public void DoorOpeningTriggerEnter(int doorId)
-    {      
-           if(doorOpenTriggerAction != null)
+        if(this.gameObject.name == "Door 1")
         {
-            doorOpenTriggerAction(doorId);
+            Debug.Log("DOOR 1");
         }
     }
+    public void OpenDoor()
+    {
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            this.openDoor.Play();
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            openDoorSound.OpenDoorSound();
+        }       
+      //  openDoor.enabled = false;
+    }
 }
+

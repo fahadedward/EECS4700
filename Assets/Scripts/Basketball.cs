@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class Basketball : MonoBehaviour
 {
+   
     [SerializeField]
     Transform destination;
     Rigidbody rb;
     [SerializeField]
     Transform player;
-    bool canShoot;
+    public bool canShoot;
     Vector3 distance;
     float distanceNumber;
 
@@ -20,22 +21,23 @@ public class Basketball : MonoBehaviour
     [SerializeField]
     Text scoreText;
 
+    public bool holdingBall;
+
+    TeenAnimationController teenController;
+
     public int Score
     {
         get { return score; }
         set { score = value; }
     }
+
+   
     private void Awake()
     {
         playerScript = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody>();
 
     }
-    void Start()
-    {
-    }
-
-  
     void Update()
     {
         distance = (player.transform.position - transform.position);
@@ -47,6 +49,7 @@ public class Basketball : MonoBehaviour
             transform.parent = GameObject.Find("BallDestination").transform;
             canShoot = true; 
             rb.velocity = Vector3.zero;
+            this.gameObject.GetComponent<SphereCollider>().enabled = false;
         }
     }
     private void FixedUpdate()
@@ -63,7 +66,9 @@ public class Basketball : MonoBehaviour
                 playerScript.Charging = false;
                 playerScript.Releasing = false;
                 ballTimer = 0f;
-            } 
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
+
+            }
             else if (playerScript.Releasing && ballTimer <= 0.5f)
             {
                 Debug.Log("TIMER" + ballTimer);
@@ -74,6 +79,7 @@ public class Basketball : MonoBehaviour
                 playerScript.Charging = false;
                 playerScript.Releasing = false;
                 ballTimer = 0f;
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
             }
             else if (playerScript.Releasing && ballTimer <= 1f)
             {
@@ -85,6 +91,7 @@ public class Basketball : MonoBehaviour
                 playerScript.Charging = false;
                 playerScript.Releasing = false;
                 ballTimer = 0f;
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
             }
             else if (playerScript.Releasing && ballTimer <= 1.5f)
             {
@@ -96,6 +103,7 @@ public class Basketball : MonoBehaviour
                 playerScript.Charging = false;
                 playerScript.Releasing = false;
                 ballTimer = 0f;
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
             }
             else if (playerScript.Releasing && ballTimer >= 1.5f)
             {
@@ -107,6 +115,7 @@ public class Basketball : MonoBehaviour
                 playerScript.Charging = false;
                 playerScript.Releasing = false;
                 ballTimer = 0f;
+                this.gameObject.GetComponent<SphereCollider>().enabled = true;
             }
         }
     }

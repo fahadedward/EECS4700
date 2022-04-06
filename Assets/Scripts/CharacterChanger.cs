@@ -28,10 +28,6 @@ public class CharacterChanger : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             index++;
         }
-     
-    }
-    private void Update()
-    {
-        Debug.Log(index);
+
     }
 }

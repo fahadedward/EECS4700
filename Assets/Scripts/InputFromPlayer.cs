@@ -11,6 +11,11 @@ public class InputFromPlayer : MonoBehaviour
     GameObject[] camAndPlayer;
 
     [SerializeField]
+    Transform wife;
+    [SerializeField]
+    Player player;
+
+    [SerializeField]
     GameObject doorCode;
     Vector3 distance;
     float distanceNumber;
@@ -23,6 +28,9 @@ public class InputFromPlayer : MonoBehaviour
     Animation[] doorOpening;
 
     Portals portal;
+
+    [SerializeField]
+    Dialogue dialogue;
     public string PlayerInput
     {
         get { return playerInput; }
@@ -31,6 +39,8 @@ public class InputFromPlayer : MonoBehaviour
     void Start()
     {
         portal = FindObjectOfType<Portals>();
+        dialogue = gameObject.GetComponent<Dialogue>();
+        player = GameObject.Find("Player").GetComponent<Player>();
         //doorCode.DeactivateInputField();
     }
 
@@ -46,14 +56,16 @@ public class InputFromPlayer : MonoBehaviour
             ePressed += 1;
             if(ePressed == 1)
             {
-                camAndPlayer[0].SetActive(false);
-                camAndPlayer[1].SetActive(false);
+                //  camAndPlayer[0].SetActive(false);
+                //  camAndPlayer[1].SetActive(false);
+                player.PickingUp = true;
                 camAndPlayer[2].SetActive(true);
                 doorCode.SetActive(true);
             } else
             {
-                camAndPlayer[0].SetActive(true);
-                camAndPlayer[1].SetActive(true);
+                //  camAndPlayer[0].SetActive(true);
+                //  camAndPlayer[1].SetActive(true);
+                player.PickingUp = false;
                 camAndPlayer[2].SetActive(false);
                 doorCode.SetActive(false);
                 ePressed = 0;
@@ -67,14 +79,17 @@ public class InputFromPlayer : MonoBehaviour
         playerInput = input.ToLower();
         if(playerInput == "sarah")
         {
-            Debug.Log("Open Door");
+            player.PickingUp = false;
             portal.PortalEnum = Portals.Portal.BPortal;
             doorOpening[0].Play();
             doorOpening[1].Play();
+            camAndPlayer[2].SetActive(false);
+            doorCode.SetActive(false);
+            wife.gameObject.SetActive(false);
         }
         else
         {
-            
+            dialogue.OpeningDoor();
         }
     }
 }
